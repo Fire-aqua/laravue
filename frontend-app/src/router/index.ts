@@ -11,11 +11,6 @@ const routes: Array<RouteConfig> = [
     component: Home,
   },
   {
-    path: '/myhome',
-    name: 'Home',
-    component: () => import('@/views/Home.vue'),
-  },
-  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -26,7 +21,19 @@ const routes: Array<RouteConfig> = [
   {
     path: '/deads',
     component: () => import('@/views/deads/DeadsList.vue'),
-  }
+  },
+  {
+    path: '/structure',
+    component: () => import('@/views/Structure.vue'),
+  },
+  {
+    path: '/calc',
+    component: () => import('@/views/Calc.vue'),
+  },
+  {
+    path: '/story',
+    component: () => import('@/views/Story.vue'),
+  },
 ];
 
 const router = new VueRouter({

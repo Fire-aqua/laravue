@@ -1,39 +1,23 @@
 <template>
-  <div>    
-    <v-card
-    class="pa-12"
-    color="indigo darken-2"
-    flat
-  >
-    <v-card
-      elevation="12"
-      width="256"
+  <div>
+    <v-list
+      dense
+      rounded
     >
-      <v-navigation-drawer
-        floating
-        permanent
+      <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        link
       >
-        <v-list
-          dense
-          rounded
-        >
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-          >
-            <v-list-item-content>
-              <router-link :to="item.link">
-                <v-list-item-title>
-                  {{ item.title }}
-                </v-list-item-title>
-              </router-link>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-    </v-card>
-  </v-card>
+        <v-list-item-content>
+          <router-link :to="item.link">
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
+          </router-link>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>    
   </div>
 </template>
 
@@ -44,8 +28,10 @@ export default Vue.extend({
       return {
         items: [
           { title: 'Home', link: '/' },
-          { title: 'About', link: '/about' },
+          { title: 'Calculator', link: '/calc' },
           { title: 'Deads', link: '/deads' },
+          { title: 'Story', link: '/story' },
+          { title: 'Structure', link: '/structure' },
         ],
       }
     },

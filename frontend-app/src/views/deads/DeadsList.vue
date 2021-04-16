@@ -10,6 +10,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+
 export default Vue.extend({
   data() {
     return {
@@ -34,7 +35,6 @@ export default Vue.extend({
       ]
     }
   },
-
   mounted() {
     this.getDeadsFromServer()
   },
@@ -46,5 +46,6 @@ export default Vue.extend({
       })
     }    
   }
+
 })
 </script>

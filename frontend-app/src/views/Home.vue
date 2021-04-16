@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    Данный проект создан в качестве тренировочной площадки в освоении фреймворка vue.<br><br>
+    Calc - добавление математических и графических компонентов. <br>
+    Deads - связь с базой на бэкенде, фабрика данных. <br>
+    Story - работа с массивами.<br>
+    Structure - добавление и удаление детей к родителям на фронте.
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
+@Component
 export default class Home extends Vue {}
 </script>

@@ -1,13 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is an about page {{ text }}</h1>
-    <v-data-table
-  :headers="headers"
-  :items="deads"
-  :items-per-page="2"
-  class="elevation-1"
-  />
-
+  <div>    
     <v-text-field v-model="text"/>
     {{ countChange }}
      <v-form v-model="user">
@@ -64,7 +56,24 @@
     :mytext.sync="firstname"
     />
   </div>
-  <div v-else>Заполните данные</div>    
+  <div v-else>Заполните данные</div>   
+  <v-row justify="center"
+    class="my-3">     
+    <profile-component
+      v-model="parentFistName"
+      @input="saveLastName"
+      @my-event="saveLastName"
+      :age="18"
+      :name="fullName"
+    />
+    <v-text-field
+    v-model="fullName"
+    />
+    </v-row>
+    <v-row>
+    <h1>{{parentFirstName}}</h1>
+    <h3>{{parentLastName}}</h3>
+    </v-row> 
   </div>
 </template>
 
@@ -72,20 +81,28 @@
 import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import AboutSecondStage from '../views/AboutSecondStage.vue'
-import axios from 'axios'
+import ProfileComponent from '../components/ProfileComponent.vue';
 
 @Component({
   components: {
-    AboutSecondStage
+    AboutSecondStage,
+    ProfileComponent,
   }
 })
 export default class About extends Vue {
   firstname = '';
   lastname = '';
   sex: string | null = null;
-  text = 'w';
+  text = '';
   countChange = 0;
   users: any[] = []
+  fullName = ""
+  parentFirstName = ""
+  parentLastName = ""
+  
+  saveLastName(eventData) {
+    this.parentLastName = eventData
+  }
 
   get fio() {
     return `${this.upperLowerFio(this.firstname)} ${this.upperLowerFio(this.lastname)}`;
@@ -95,14 +112,6 @@ export default class About extends Vue {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
   }
 
-  get newValue() {
-    return `${this.text}d11111`;
-  }
-
-  mounted() {
-    this.getUsers();
-  }
-
   @Watch('text')
   textChanged() {
     this.countChange += 1;
@@ -110,59 +119,7 @@ export default class About extends Vue {
 
   get completedFirstStage(): boolean {
     return !!this.firstname && !!this.lastname && !!this.sex     
-  }
-
-  async getUsers() {
-    this.users = await axios.get('http://localhost:8000/api/users')
-    .then((response) => response.data)
-    response = {
-      data: []
-    }
-  }
-
-  data () {
-    return {
-      headers: [
-        {
-          text: 'deads',
-          align: 'start',
-          sotrable: true,
-          value: 'name',
-        },
-        { text: 'Name', value: 'name'},
-        { text: 'Date of death', value: 'date'},
-        { text: 'Age', value: 'years'}
-
-      ],
-      deads: [
-        {
-          name: 'George Mallory',
-          date: '18.06.1924',
-          years: 37,
-        },
-        {
-          name: 'Andrew Irvine',
-          date: '08.06.1924',
-          years: 22,
-        },
-        {
-          name: 'Maurice Wilson',
-          date: '01.06.1934',
-          years: 36,
-        },
-        {
-          name: 'Hannelore Schmatz',
-          date: '02.10.1979',
-          years: 39,
-        },
-        {
-          name: 'Peter Boardman',
-          date: '17.05.1982',
-          years: 31,
-        },
-      ],
-        }
-      }
-    }
+  }    
+}
 
 </script>

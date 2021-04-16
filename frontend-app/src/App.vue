@@ -1,21 +1,19 @@
 <template>
-  <div id="app">    
-    <v-container>
-      <div class="row">
-        <div class="col-3">
-          <nav-menu/>
-        </div>
-        <div class="col-9">
-          <router-view/>
-        </div>
-      </div>
-    </v-container>
-  </div>
+  <v-app>    
+    <v-navigation-drawer app>
+      <nav-menu/>
+    </v-navigation-drawer>
+    <v-main>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import NavMenu from '@/components/NavMenu.vue';
+import NavMenu from './components/NavMenu.vue';
 import { Component } from 'vue-property-decorator';
 
 @Component(
